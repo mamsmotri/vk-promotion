@@ -16,19 +16,19 @@ def main():
     full_group_links = sheet.col_values(1)
 
     login = post_data.cell(7, 3).value
-    print login
+    print (login)
     password = post_data.cell(8, 3).value
-    print password
+    print (password)
 
     post_text = post_data.cell(2, 3).value
     post_photos = 'photo' + post_data.cell(3, 3).value
     post_audios = 'audio' + post_data.cell(4, 3).value
+    post_audio_playlist = 'audio_playlist-64592951_1'
     post_attachments = post_photos + ", " + post_audios
-    print post_attachments
+    print (post_attachments)
 
     print(full_group_links)
 
-    # login, password = '+79095006032', 'docent665544332211'
     vk_session = vk_api.VkApi(login, password)
 
     try:
@@ -43,14 +43,11 @@ def main():
         if full_group_link == '':
             continue
         group_short_name = full_group_link[15:]
-        print group_short_name
+        print (group_short_name)
 
-        group = vk.groups.getById(group_ids=group_short_name);
+        group = vk.groups.getById(group_ids=group_short_name)
         group_id = -group[0]['id']
-        print group_id
-        response = vk.wall.post(owner_id=group_id, message=post_text, attachments=post_attachments)
-        # response = vk.wall.post(owner_id=group_id, from_group=1, message=post_text, attachments=post_attachments)
-        # response = vk.wall.post(owner_id='25336774', message='@sukipadut (суки падут) эт я свою программу на питоне проверяю, надеюсь ты не против', attachments='photo103256323_456239162, audio103256323_456239054')
+        response = vk.wall.post(owner_id=group_id, message=post_text, attachments=post_audio_playlist)
 
 
 
